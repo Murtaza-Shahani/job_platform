@@ -1,4 +1,4 @@
-const jobs = [
+const samplejobs = [
     {
         title: "Software Engineer",
         description: "Develop and maintain web applications.",
@@ -41,4 +41,5 @@ const jobs = [
     }
 ];
 
-module.exports = jobs;
+module.exports = {data: samplejobs};
+
