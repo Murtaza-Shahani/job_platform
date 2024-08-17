@@ -3,7 +3,57 @@ body {
   font-family: "Arial", sans-serif;
   background-color: black;
 }
-/* DISPLAY CSS START */
+/* Navbar logo */
+.navbar-brand img {
+  margin-right: 8px;
+}
+
+/* Center-align navbar links */
+.navbar-nav {
+  margin: 0 auto;
+}
+
+/* Adjust spacing for buttons on the right */
+.d-flex .btn {
+  margin-left: 8px;
+}
+.navbar-nav .nav-link{
+  font-size: 20px;
+}
+/* Adjust hover and active states for the navbar links */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #f8f9fa; /* Lighten the link color on hover */
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle background highlight */
+  border-radius: 5px;
+  padding: 5px 10px;
+  
+}
+
+/* Button styling */
+.btn-outline-light {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.btn-outline-light:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.btn-danger {
+  color: #ffffff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+
+/* DISPLAY jobs CSS START */
 /* Container for the cards */
 .container {
   padding: 1rem;
@@ -88,11 +138,36 @@ body {
     margin-bottom: 1rem;
   }
 }
+/* Styles for filter labels on the job listings page */
+.filter-label {
+  font-weight: bold;
+  color: #343a40;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.filter-label::after {
+  content: ":";
+  margin-left: 2px;
+}
+
+.form-select {
+  border-radius: 5px;
+  border-color: #ced4da;
+}
+
+.form-select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
 
 /* Card css end */
 /* Apply input css */
 .apply-form-container {
-  max-width: 600px;
+  max-width: 400px;
+  
   margin: 50px auto;
   padding: 10px;
   background-color: #f8f9fa;
@@ -138,3 +213,178 @@ body {
   background-color: #0056b3;
 }
 /* Apply css end */
+/*home page css start */
+
+        /* Home Page Styles */
+        .home {
+          height: 100vh;
+          
+          background: linear-gradient(135deg, #6a11cb, #2575fc); /* Green to Blue */
+          color: #ffffff; /* White text color */
+        
+        
+          padding: 3;
+      }
+      
+      .home .row {
+          height: 100%;
+      }
+      
+      .home h1 {
+          color: white;
+          margin-bottom: 5px;
+      }
+      
+      .home p {
+          color: white;
+          margin-bottom: 20px;
+          font-size: 20px;
+      }
+      
+      .home .btn {
+          max-width: 200px;
+          background-color: #f10f0f; /* A deep, contrasting color */
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    margin-top: 20px;
+    border-radius: 55px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .home .btn:hover{
+        background-color: #7209b7; /* Slightly lighter color for hover effect */
+        color: white;
+      }
+      
+      .img-sec img {
+          height: 450px;
+          width:  600px;
+          margin-top: 90px;
+          object-fit: cover;
+          border-radius: 8px;
+      }
+      
+        /* home css end */ 
+        /* add job css start */
+        .add-container {
+  max-width: 600px;
+  margin: auto;
+  background-color: #f9f9f9;
+  padding: 3px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form elements */
+.add-container.form-group label {
+  font-weight: bold;
+  color: #333;
+}
+
+.add-container.form-control {
+  width: 100%;
+  padding: 3px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 2px;
+  margin-bottom: 7px;
+}
+.add-container.form-group {
+  margin-bottom: 5px;
+}
+
+.add-container.form-group label {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 3px;
+  color: #333;
+}
+
+.add-container.form-group select {
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.add-container.form-group select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  background-color: #fff;
+}
+
+.add-container.form-group select option {
+  padding: 3px;
+  color: #333;
+  background-color: #fff;
+}
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 7px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.form-group select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  background-color: #fff;
+}
+
+.form-group select option {
+  padding: 3px;
+  color: #333;
+  background-color: #fff;
+}
+/* Style the submit button */
+.add-container .btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 3px 5px;
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  width: 120px;
+  height: 40px;
+}
+
+.add-container .btn-primary:hover {
+  background-color: green;
+}
+
+/* Additional spacing for the container */
+.add-container.container h2 {
+  margin-bottom: 5px;
+}
+/* addJobs css end */
+
+  
