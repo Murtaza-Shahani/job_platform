@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/css/style.css">
+<body class="update-page">
+    <div id="update-form-container">
+        
+        <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+            
+            <div>
+                <label for="title">Job Title:</label>
+                <input type="text" id="title" name="listing[title]" value="<%= listing.title %>">
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" name="listing[description]"><%= listing.description %></textarea>
+            </div>
+            <div>
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="listing[location]" value="<%= listing.location %>">
+            </div>
+            <div>
+                <label for="salary">Salary:</label>
+                <input type="text" id="salary" name="listing[salary]" value="<%= listing.salary %>">
+            </div>
+            <div>
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="listing[category]" value="<%= listing.category %>">
+            </div>
+            <div>
+                <label for="requirements">Requirements:</label>
+                <textarea id="requirements" name="listing[requirements]"><%= listing.requirements %></textarea>
+            </div>
+            
+            <button type="submit">Update Listing</button>
+        </form>
+    </div>
+</body>
+
+    
+
+</form>

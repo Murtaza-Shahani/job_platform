@@ -267,7 +267,20 @@ body {
           margin-top: 90px;
           object-fit: cover;
           border-radius: 8px;
+          
       }
+      /* Remove padding from container-fluid to span the entire width */
+.container-fluid.home {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Ensure the row takes up the full width without additional margins */
+.home .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
       
         /* home css end */ 
         /* add job css start */
@@ -386,5 +399,167 @@ body {
   margin-bottom: 5px;
 }
 /* addJobs css end */
+/* Signup & Login Page Styles */
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.auth-container .form-control {
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.auth-container .btn-primary {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.auth-container .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.auth-container .form-text {
+  text-align: center;
+  margin-top: 15px;
+  color: #6c757d;
+}
+
+.auth-container .form-text a {
+  color: #007bff;
+}
+
+.auth-container .form-text a:hover {
+  text-decoration: underline;
+}
+
+/* Specific to Signup and Login Pages */
+.signup-container h1, .login-container h1 {
+  color: #007bff;
+}
+
+/* Update.ejs css */
+/* Style for the update form */
+#update-form-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#update-form-container div {
+  margin-bottom: 15px;
+}
+
+#update-form-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+#update-form-container input[type="text"],
+#update-form-container textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#update-form-container textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+#update-form-container button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#update-form-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Specific styles for this page */
+.update-page {
+  background-color: #e9ecef;
+  padding: 40px 0;
+}
+
+/* applications.css */
+
+.applications-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.applications-page h1 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+  color: white;
+}
+
+.applications-page h2 {
+  font-size: 1.5em;
+  color: #555;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.applications-list {
+  margin-top: 20px;
+}
+
+.application-card {
+  background-color: #f7f7f7;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.application-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.application-card p {
+  margin: 5px 0;
+}
+
+.application-card a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.application-card a:hover {
+  text-decoration: underline;
+}
+
+
 
   

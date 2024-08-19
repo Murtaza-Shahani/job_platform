@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="/css/applications.css">
+
+<div class="applications-page">
+    <h1>Applications Overview</h1>
+    <h2>You have received <%= applicationCount %> applications.</h2>
+
+    <div class="applications-list">
+        <% applications.forEach(application => { %>
+            <div class="application-card">
+                <h3>Job Title: <%= jobTitleMap[application.jobId] %></h3>
+                <h4>Applicant: <%= application.fullName %></h4>
+                <p>Email: <%= application.email %></p>
+                <p>Contact: <%= application.contact %></p>
+                <p>Resume Link: <a href="<%= application.resumeLink %>" target="_blank">View Resume</a></p>
+                <p>Cover Letter: <%= application.coverLetter %></p>
+            </div>
+        <% }); %>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const JobSchema = new mongoose.Schema({
     title: {
@@ -27,6 +28,11 @@ const JobSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    owner: {
+        type: Schema.Types.ObjectId,  // This indicates that the 'owner' field will store an ObjectId
+        ref: 'User',  // 'User' refers to the model name that this ObjectId relates to
+        
+    }
 });
 
 module.exports = mongoose.model('Listing', JobSchema);
