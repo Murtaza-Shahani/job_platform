@@ -64,7 +64,7 @@ app.use((req,res,next)=>
     {
         res.locals.success = req.flash("success"); //flash msg for sucess
         res.locals.error = req.flash("error"); // flash msg for error 
-        res.locals.currUser= req.user;  // accessing curr user information in nav bar or other ejs template
+        res.locals.user= req.user;  // accessing curr user information in nav bar or other ejs template
         next();
     })
     
@@ -131,27 +131,26 @@ app.get('/apply/:id', (req, res) => {
     res.render('applyform', { jobId });
 });
 //route to post/save employee data
-app.post('/apply', async (req, res) => {
+app.get('/dashboard', isLoggedIn, async (req, res) => {
     try {
-        const { jobId, fullName, email, contact, resumeLink, coverLetter } = req.body;
+        // Fetch applications where the userId matches the logged-in user's ID
+        const applications = await Employees.find({ userId: req.user._id })
+            .populate('jobId') // Populate the job details from the Listing schema
+            
 
-        const newApplication = new Employees({
-            jobId: jobId,
-            fullName: fullName,
-            email: email,
-            contact: contact,
-            resumeLink: resumeLink, // Save the resume link
-            coverLetter: coverLetter
-        });
+        if (applications.length === 0) {
+            req.flash('error', 'No applications found for this user.');
+            return res.redirect('/');
+        }
 
-        await newApplication.save();
-        console.log("new application saved successfully", newApplication )
-        res.redirect('/listings'); // Redirect after successful submission
+        // Render the dashboard with user and application details
+        res.render('dashboard', { user: req.user, applications });
     } catch (error) {
-        console.error("Error saving application:", error);
-        res.status(500).send("Internal Server Error");
+        console.error('Error fetching applications:', error);
+        req.flash('error', 'Unable to fetch application details.');
+        res.redirect('/');
     }
-}); 
+});
 
 //addpost Route to render add.ejs 
 
@@ -197,7 +196,7 @@ app.post('/add-post', async (req, res) => {
     }
 });
 
-//route to render the uodate.ejs 
+//route to render the update.ejs 
 // Route to render the update page
 app.get('/listings/:id/edit', isLoggedIn, async (req, res) => {
     const { id } = req.params;
@@ -301,11 +300,36 @@ app.get('/applications', isLoggedIn, async (req, res) => {
         res.redirect('/listings');
     }
 });
+//user dashboard section 
+// Candidate Dashboard Route
+
+app.get('/dashboard', isLoggedIn, async (req, res) => {
+    try {
+        // Fetch the candidate's profile from Employees schema based on userId
+        const candidateProfile = await Employees.find({ userId: req.user._id })
+            .populate('jobId') // Populate the job details
+            
+
+        if (candidateProfile.length === 0) {
+            req.flash('error', 'Candidate profile not found.');
+            return res.redirect('/');
+        }
+
+        // Pass user object and candidate profile to the dashboard view
+        res.render('dashboard', { user: req.user, candidateProfile });
+    } catch (error) {
+        console.error('Error fetching candidate data:', error);
+        req.flash('error', 'Unable to fetch candidate details.');
+        res.redirect('/');
+    }
+});
+
+
 
 
 
 //signup and login part start here
-// Middleware to save the redirect URL before login
+
 
 // Route for the signup page
 app.get("/signup", (req, res) => {

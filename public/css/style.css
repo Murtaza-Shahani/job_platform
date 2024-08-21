@@ -560,6 +560,61 @@ body {
   text-decoration: underline;
 }
 
+/* User dashboard .css */
+.dashboard-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.dashboard-container h1{
+  color: white;
+  text-align: center;
+}
+
+.dashboard-container h2 {
+
+  text-align: center;
+}
+
+.profile-section, .applications-section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section p, .applications-section ul {
+  margin: 10px 0;
+}
+
+.applications-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.applications-section li {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+
 
 
   

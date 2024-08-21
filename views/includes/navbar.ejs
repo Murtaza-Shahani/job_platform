@@ -3,8 +3,6 @@
         <!-- Logo on the left -->
         <a class="navbar-brand" href="/">
             <img src="assets/download.png" alt="Job Logo" width="50" height="45" class="d-inline-block align-text-top rounded">
-
-            
         </a>
 
         <!-- Toggler for mobile view -->
@@ -22,22 +20,33 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/listings">Job Listings</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/addpost">Add Job</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/applications">View Applications</a>
-                </li>
                 
+                <% if (user) { %>
+                    <% if (user._id.equals('66c2c9c788c4aab0d8c35416')) { %>
+                        <!-- Display owner-specific links -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/addpost">Add Job</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/applications">View Applications</a>
+                        </li>
+                    <% } %>
+                    <!-- Always visible link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Profile</a>
+                    </li>
+                <% } %>
             </ul>
         </div>
 
         <!-- Right-aligned buttons -->
         <div class="d-flex">
-            <a class="btn btn-outline-light me-2" href="/login">Sign In</a>
-            <a class="btn btn-outline-light me-2" href="/signup">Sign Up</a>
-            <a class="btn btn-danger" href="/logout">Logout</a>
+            <% if (user) { %>
+                <a class="btn btn-danger" href="/logout">Logout</a>
+            <% } else { %>
+                <a class="btn btn-outline-light me-2" href="/login">Sign In</a>
+                <a class="btn btn-outline-light me-2" href="/signup">Sign Up</a>
+            <% } %>
         </div>
     </div>
 </nav>

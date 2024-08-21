@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 
-const ApplicationSchema = new mongoose.Schema({
+const EmployeeSchema = new mongoose.Schema({
     jobId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Listing',
+        required: true
+    },
+    userId: { // New field to link the application to the user
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     fullName: {
@@ -32,5 +37,5 @@ const ApplicationSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Employees', ApplicationSchema);
+module.exports = mongoose.model('Employees', EmployeeSchema);
 

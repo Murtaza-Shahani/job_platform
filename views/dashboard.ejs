@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <title>Candidate Dashboard</title>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1>Welcome, <%= user.username %>!</h1>
+
+    <div class="applications-section">
+        <h2>Your Applications</h2>
+        <% if (applications.length > 0) { %>
+            <ul>
+                <% applications.forEach(application => { %>
+                    <li>
+                        <strong>Job Title:</strong> <%= application.jobId.title %>
+                        <br>
+                        <strong>Job Location:</strong> <%= application.jobId.location %>
+                        <br>
+                        <strong>Applied On:</strong> <%= application.createdAt.toDateString() %>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>You haven't applied to any jobs yet.</p>
+        <% } %>
+    </div>
+</div>
+        
+</body>
+</html>
