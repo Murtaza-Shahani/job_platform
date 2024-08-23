@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apply for Job</title>
     <link rel="stylesheet" href="/css/style.css">
-    
 </head>
 <body>
 
 <div class="apply-form-container">
     <h2>Apply for Job</h2>
-    <form action="/apply" method="POST">
-        <input type="hidden" name="jobId" value="<%= jobId %>">
+    <form action="/apply/<%= job._id %>" method="POST">
+        <!-- No need for hidden field if jobId is directly in URL -->
+        <!-- <input type="hidden" name="jobId" value="<%= job._id %>"> -->
         <div class="form-group">
             <label for="fullName">Full Name</label>
             <input type="text" id="fullName" name="fullName" required>
@@ -25,9 +25,8 @@
             <label for="contact">Contact</label>
             <input type="number" id="contact" name="contact" required>
         </div>
-        
         <div class="form-group">
-            <label for="resumeLink">Resume Link </label>
+            <label for="resumeLink">Resume Link</label>
             <input type="url" id="resumeLink" name="resumeLink">
         </div>
         <div class="form-group">

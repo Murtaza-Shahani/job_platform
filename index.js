@@ -2,35 +2,43 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
+// Require  models
+const Listing = require('./models/listing');
+const Employees = require("./models/employees");
+const User = require("./models/user.js");
+
+
 const { saveRedUrl } = require("./middleware");
 const { isLoggedIn } = require('./middleware');
-
+//middleware that parses incoming requests like forms, req.body
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.json());
 const session = require("express-session");
 
 // Set the view engine to EJS and ensure it looks in the correct folder
 app.set('view engine', 'ejs');
+//specifies the directory where your view templates are stored
 app.set('views', path.join(__dirname, 'views'));
 const expressLayouts = require('express-ejs-layouts');
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(expressLayouts);
+
 // Define where your layout files are stored
 app.set('layout', 'layouts/boilerplates');
+//used for layout template that will wrap around your other view templates.
+app.use(expressLayouts);
 const flash = require("connect-flash");
 
-// Require Listing model
-const Listing = require('./models/listing');
-const Employees = require("./models/employees");
 
 
 //athentications modules
 const passport = require("passport");
+//Passport strategy for authenticating with a username and password.
 const LocaltStrategy = require("passport-local");
-const User = require("./models/user.js");
-//defining th options for sessions]
+
+//defining th options for sessions   secret used for session data on the client side is secure
 const sessionOptions ={
     secret: "mysecret",
     resave: false,
@@ -57,7 +65,7 @@ app.use(passport.session());
 passport.use(new LocaltStrategy(User.authenticate()))
 //serializerUser means store the user information  session
 passport.serializeUser(User.serializeUser());
-//deseriallizerUser means remove the user information from session
+//used to retrieve user information from the session
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>
@@ -126,32 +134,50 @@ app.get('/listings', isLoggedIn,async (req, res) => {
 
 
 //render applyform route 
-app.get('/apply/:id', (req, res) => {
+app.get('/apply/:id', async (req, res) => {
     const jobId = req.params.id;
-    res.render('applyform', { jobId });
+
+    // Find the job in the database
+    const job = await Listing.findById(jobId);
+
+    // If job not found, redirect with error message
+    if (!job) {
+        req.flash('error', 'Job not found');
+        return res.redirect('/listings');
+    }
+
+    // Pass the job object to the template
+    res.render('applyform', { job });
 });
+
 //route to post/save employee data
-app.get('/dashboard', isLoggedIn, async (req, res) => {
+app.post('/apply/:jobId', async (req, res) => {
     try {
-        // Fetch applications where the userId matches the logged-in user's ID
-        const applications = await Employees.find({ userId: req.user._id })
-            .populate('jobId') // Populate the job details from the Listing schema
-            
+        // Retrieve job ID from URL parameters
+        const jobId = req.params.jobId;
 
-        if (applications.length === 0) {
-            req.flash('error', 'No applications found for this user.');
-            return res.redirect('/');
-        }
+        // Create a new application
+        const application = new Employees({
+            jobId: jobId,
+            userId: req.user._id,
+            fullName: req.body.fullName,
+            email: req.body.email,
+            contact: req.body.contact,
+            resumeLink: req.body.resumeLink,
+            coverLetter: req.body.coverLetter
+        });
 
-        // Render the dashboard with user and application details
-        res.render('dashboard', { user: req.user, applications });
-    } catch (error) {
-        console.error('Error fetching applications:', error);
-        req.flash('error', 'Unable to fetch application details.');
-        res.redirect('/');
+        // Save the application to the database
+        await application.save();
+
+        req.flash('success', 'Application submitted successfully!');
+        res.redirect('/listings');
+    } catch (err) {
+        console.error(err);
+        req.flash('error', 'Something went wrong. Please try again.');
+        res.redirect(`/listings/${req.params.jobId}`);
     }
 });
-
 //addpost Route to render add.ejs 
 
 app.get('/addpost', isLoggedIn, async (req, res) => {
@@ -301,29 +327,29 @@ app.get('/applications', isLoggedIn, async (req, res) => {
     }
 });
 //user dashboard section 
-// Candidate Dashboard Route
+// correect Candidate Dashboard Route
 
-app.get('/dashboard', isLoggedIn, async (req, res) => {
+app.get('/dashboard', async (req, res) => {
     try {
-        // Fetch the candidate's profile from Employees schema based on userId
-        const candidateProfile = await Employees.find({ userId: req.user._id })
-            .populate('jobId') // Populate the job details
-            
+        console.log(req.user); 
+        // Fetch the user information from the session
+        const user = req.user;
 
-        if (candidateProfile.length === 0) {
-            req.flash('error', 'Candidate profile not found.');
-            return res.redirect('/');
+        if (!user) {
+            req.flash('error', 'You must be logged in to view your profile');
+            return res.redirect('/login');
         }
 
-        // Pass user object and candidate profile to the dashboard view
-        res.render('dashboard', { user: req.user, candidateProfile });
-    } catch (error) {
-        console.error('Error fetching candidate data:', error);
-        req.flash('error', 'Unable to fetch candidate details.');
+        // Fetch all the job applications made by the user
+        const applications = await Employees.find({ userId: user._id }).populate('jobId').exec();
+
+        res.render('dashboard', { user, applications });
+    } catch (err) {
+        console.error(err);
+        req.flash('error', 'Something went wrong. Please try again.');
         res.redirect('/');
     }
 });
-
 
 
 

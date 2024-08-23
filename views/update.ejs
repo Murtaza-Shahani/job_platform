@@ -1,39 +1,41 @@
-<link rel="stylesheet" href="/css/style.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Update Job Listing</title>
+</head>
 <body class="update-page">
-    <div id="update-form-container">
-        
+    <div class="update-container">
+        <h2>Update Job Listing</h2>
         <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
-            
-            <div>
+            <div class="form-group">
                 <label for="title">Job Title:</label>
-                <input type="text" id="title" name="listing[title]" value="<%= listing.title %>">
+                <input type="text" id="title" name="listing[title]" class="form-control" value="<%= listing.title %>">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea id="description" name="listing[description]"><%= listing.description %></textarea>
+                <textarea id="description" name="listing[description]" class="form-control"><%= listing.description %></textarea>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="location">Location:</label>
-                <input type="text" id="location" name="listing[location]" value="<%= listing.location %>">
+                <input type="text" id="location" name="listing[location]" class="form-control" value="<%= listing.location %>">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="salary">Salary:</label>
-                <input type="text" id="salary" name="listing[salary]" value="<%= listing.salary %>">
+                <input type="text" id="salary" name="listing[salary]" class="form-control" value="<%= listing.salary %>">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="category">Category:</label>
-                <input type="text" id="category" name="listing[category]" value="<%= listing.category %>">
+                <input type="text" id="category" name="listing[category]" class="form-control" value="<%= listing.category %>">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="requirements">Requirements:</label>
-                <textarea id="requirements" name="listing[requirements]"><%= listing.requirements %></textarea>
+                <textarea id="requirements" name="listing[requirements]" class="form-control"><%= listing.requirements %></textarea>
             </div>
-            
-            <button type="submit">Update Listing</button>
+            <button type="submit" class="btn-primary">Update Listing</button>
         </form>
     </div>
 </body>
-
-    
-
-</form>
+</html>

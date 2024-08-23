@@ -1,11 +1,24 @@
-/* Global styles */
-body {
-  font-family: "Arial", sans-serif;
-  background-color: black;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+body, html {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  background-color: #1a1a1a;
+
+  
+  color: #333;
+}
+
 /* Navbar logo */
 .navbar-brand img {
   margin-right: 8px;
+}
+.navbar{
+  background-color: #1a1a1a;
 }
 
 /* Center-align navbar links */
@@ -19,12 +32,13 @@ body {
 }
 .navbar-nav .nav-link{
   font-size: 20px;
+  color: white;
 }
 /* Adjust hover and active states for the navbar links */
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
   color: #f8f9fa; /* Lighten the link color on hover */
-  background-color: rgba(255, 255, 255, 0.1); /* Subtle background highlight */
+  background-color: #1a1a1a;
   border-radius: 5px;
   padding: 5px 10px;
   
@@ -56,147 +70,189 @@ body {
 /* DISPLAY jobs CSS START */
 /* Container for the cards */
 .container {
-  padding: 1rem;
+  padding: 20px;
 }
 
-/* Card styling */
-.card {
-  border: none;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+h1 {
+  color: #f39c12;
+  margin-bottom: 30px;
+  font-size: 2rem;
 }
 
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.card-body {
-  padding: 1.5rem;
-}
-
-.card-title {
-  font-size: 1.25rem;
-  color: #343a40;
-  margin-bottom: 1rem;
-}
-
-.card-text {
-  font-size: 1rem;
-  color: #495057;
-  margin-bottom: 1rem;
-}
-
-.card-text strong {
-  color: #212529;
-}
-
-/* Button styling */
-.btn button {
-  border-radius: 5px;
-  height: 30px;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: #fff;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #004085;
-}
-
-.btn-warning {
-  background-color: #ffc107;
-  border-color: #ffc107;
-  color: #212529;
-}
-
-.btn-warning:hover {
-  background-color: #e0a800;
-  border-color: #d39e00;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-  border-color: #dc3545;
-  color: #fff;
-}
-
-.btn-danger:hover {
-  background-color: #c82333;
-  border-color: #bd2130;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .card {
-    margin-bottom: 1rem;
-  }
-}
-/* Styles for filter labels on the job listings page */
-.filter-label {
-  font-weight: bold;
-  color: #343a40;
-  font-size: 1.1rem;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.filter-label::after {
-  content: ":";
-  margin-left: 2px;
+.formm {
+  background-color: #2c2c2c;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .form-select {
+  background-color: #333333;
+  border: 1px solid #444444;
   border-radius: 5px;
-  border-color: #ced4da;
+  color: #ffffff;
+  padding: 10px;
+  margin-bottom: 15px;
 }
 
 .form-select:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #f39c12;
+  box-shadow: 0 0 5px #f39c12;
+  outline: none;
 }
 
+.btn-primary {
+  background-color: #f39c12;
+  border: none;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: #e67e22;
+}
+
+.card {
+  background-color: #2c2c2c;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  color: #f39c12;
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+}
+
+.card-text {
+  color: #cccccc;
+  margin-bottom: 10px;
+}
+
+.card-text strong {
+  color: #ffffff;
+}
+
+/* General Button Styles */
+.btn {
+  border-radius: 5px; /* Rounded corners */
+  padding: 4px 10px; /* Increased padding for better height and width */
+  font-size: 0.9rem; /* Slightly larger font size for readability */
+  text-align: center;
+  display: inline-flex; /* Aligns items horizontally */
+  align-items: center; /* Vertically centers the text */
+  justify-content: center; /* Horizontally centers the text */
+  margin-top: 10px;
+  border: none; /* Remove default border */
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+  min-width: 100px; /* Minimum width for uniformity */
+  height: 45px; /* Consistent height for all buttons */
+  font-weight: 600; /* Slightly bolder text for prominence */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+}
+
+/* Specific Styles for Danger Button */
+.btn-danger {
+  background-color: #dc3545; /* Red background */
+  border: 1px solid #dc3545; /* Border to match background color */
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* Darker red on hover */
+  border-color: #c82333; /* Darker border on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Form-specific Adjustments */
+form .btn {
+  padding: 8px 16px; /* Adjusted padding for form buttons */
+  min-width: auto; /* Remove min-width for form buttons */
+  height: auto; /* Allow height to adjust naturally */
+  box-shadow: none; /* Remove shadow to fit form design */
+}
+
+/* Override styles for btn-danger inside forms */
+form .btn-danger {
+  padding: 12px 20px; /* Same padding as general buttons */
+  font-size: 0.9rem; /* Same font size */
+  border-radius: 5px; /* Same border-radius */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Same shadow */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+      padding: 10px;
+  }
+
+  .form-select {
+      margin-bottom: 10px;
+  }
+
+  .btn-primary {
+      padding: 8px;
+      font-size: 0.85rem;
+  }
+
+  .card {
+      margin-bottom: 15px;
+  }
+}
 
 /* Card css end */
 /* Apply input css */
 .apply-form-container {
   max-width: 400px;
-  
   margin: 50px auto;
   padding: 10px;
-  background-color: #f8f9fa;
+  background-color:  #333;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .apply-form-container h2 {
   text-align: center;
   margin-bottom: 10px;
-  color: #333;
+  color:yellow;
 }
+
 .form-group {
   margin-bottom: 10px;
 }
+
 .form-group label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }
+
 .form-group input,
 .form-group textarea {
   width: 95%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #ffffff !important;  /* Changed to white */
+  color: #333; /* Darker text color for better contrast */
 }
+
 .form-group input[type="file"] {
   padding: 3px;
 }
+
 .btn-submit {
   display: block;
   width: 100%;
@@ -209,195 +265,208 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 .btn-submit:hover {
   background-color: #0056b3;
 }
+
 /* Apply css end */
 /*home page css start */
 
-        /* Home Page Styles */
-        .home {
-          height: 100vh;
-          
-          background: linear-gradient(135deg, #6a11cb, #2575fc); /* Green to Blue */
-          color: #ffffff; /* White text color */
-        
-        
-          padding: 3;
-      }
-      
-      .home .row {
-          height: 100%;
-      }
-      
-      .home h1 {
-          color: white;
-          margin-bottom: 5px;
-      }
-      
-      .home p {
-          color: white;
-          margin-bottom: 20px;
-          font-size: 20px;
-      }
-      
-      .home .btn {
-          max-width: 200px;
-          background-color: #f10f0f; /* A deep, contrasting color */
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 25px;
-    margin-top: 20px;
-    border-radius: 55px;
-    transition: background-color 0.3s ease;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      .home .btn:hover{
-        background-color: #7209b7; /* Slightly lighter color for hover effect */
-        color: white;
-      }
-      
-      .img-sec img {
-          height: 450px;
-          width:  600px;
-          margin-top: 90px;
-          object-fit: cover;
-          border-radius: 8px;
-          
-      }
-      /* Remove padding from container-fluid to span the entire width */
-.container-fluid.home {
-  padding-left: 0;
-  padding-right: 0;
+
+.home-container {
+  display: flex;
+  height: 100vh;
+  background-color: #1a1a1a;
+
+  color: #ffffff;
+  padding: 20px;
 }
 
-/* Ensure the row takes up the full width without additional margins */
-.home .row {
-  margin-left: 0;
-  margin-right: 0;
+.text-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 20px;
+}
+
+.animated-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #f39c12;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+.lead {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  line-height: 1.5;
+  color: #dddddd;
+}
+
+.btn-explore {
+  background-color: #f39c12;
+  color: #ffffff;
+  padding: 10px 20px;
+  width: 220px;
+  border-radius: 50px;
+  font-size: 20px;
+  outline: none;
+  border: none;
+  text-align:  center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-explore:hover {
+  background-color: #d35400;
+}
+
+.img-sec {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.job-img {
+  height: 380px;
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .animated-title {
+      font-size: 2.5rem;
+  }
+
+  .lead {
+      font-size: 1rem;
+  }
+
+  .btn-explore {
+      padding: 8px 15px;
+      font-size: 1rem;
+  }
+
+  .img-sec img {
+      width: 100%;
+      height: auto;
+  }
 }
 
       
         /* home css end */ 
         /* add job css start */
         .add-container {
-  max-width: 600px;
-  margin: auto;
-  background-color: #f9f9f9;
-  padding: 3px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Style the form elements */
-.add-container.form-group label {
-  font-weight: bold;
-  color: #333;
-}
-
-.add-container.form-control {
-  width: 100%;
-  padding: 3px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-top: 2px;
-  margin-bottom: 7px;
-}
-.add-container.form-group {
-  margin-bottom: 5px;
-}
-
-.add-container.form-group label {
-  display: block;
-  font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 3px;
-  color: #333;
-}
-
-.add-container.form-group select {
-  width: 100%;
-  padding: 5px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f8f8f8;
-  color: #333;
-  outline: none;
-  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.add-container.form-group select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  background-color: #fff;
-}
-
-.add-container.form-group select option {
-  padding: 3px;
-  color: #333;
-  background-color: #fff;
-}
-.form-group {
-  margin-bottom: 10px;
-}
-
-.form-group label {
-  display: block;
-  font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 5px;
-  color: #333;
-}
-
-.form-group select {
-  width: 100%;
-  padding: 7px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f8f8f8;
-  color: #333;
-  outline: none;
-  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.form-group select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  background-color: #fff;
-}
-
-.form-group select option {
-  padding: 3px;
-  color: #333;
-  background-color: #fff;
-}
-/* Style the submit button */
-.add-container .btn-primary {
-  background-color: #007bff;
-  border: none;
-  padding: 3px 5px;
-  border-radius: 15px;
-  color: white;
-  cursor: pointer;
-  font-size: 18px;
-  width: 120px;
-  height: 40px;
-}
-
-.add-container .btn-primary:hover {
-  background-color: green;
-}
-
-/* Additional spacing for the container */
-.add-container.container h2 {
-  margin-bottom: 5px;
-}
+          background-color: #2c2c2c;
+          padding: 20px;
+          border-radius: 8px;
+          max-width: 500px;
+          margin: 40px auto;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      
+      .add-container h2 {
+          color: #f39c12;
+          text-align: center;
+          margin-bottom: 20px;
+          font-size: 1.8rem;
+      }
+      
+      .form-group {
+          margin-bottom: 15px;
+      }
+      
+      .form-group label {
+          font-weight: bold;
+          color: #f1c40f;
+          margin-bottom: 5px;
+          display: block;
+      }
+      .form-group input{
+        background-color:  #2c2c2c;
+      }
+      
+      .form-control {
+          background-color: #333333;
+          border: 1px solid #444444;
+          border-radius: 5px;
+          padding: 10px;
+          color: #ffffff;
+          width: 100%;
+          font-size: 0.9rem;
+      }
+      
+      .form-control:focus {
+          border-color: #f39c12;
+          box-shadow: 0 0 5px #f39c12;
+          outline: none;
+      }
+      
+      select.form-control {
+          background-color: #333333;
+          color: #ffffff;
+      }
+      
+      .btn-primary {
+          background-color: #f39c12;
+          border: none;
+          color: #ffffff;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          width: 100%;
+          font-size: 1rem;
+          margin-top: 10px;
+      }
+      
+      .btn-primary:hover {
+          background-color: #e67e22;
+      }
+      
+      .btn-primary:focus {
+          outline: none;
+          box-shadow: 0 0 5px #f39c12;
+      }
+      
+      /* Adjust textarea size */
+      textarea.form-control {
+          resize: vertical;
+      }
+      
+      /* Responsive design */
+      @media (max-width: 768px) {
+          .add-container {
+              padding: 15px;
+              margin: 30px auto;
+              width: 90%;
+          }
+      
+          .btn-primary {
+              padding: 10px;
+              font-size: 0.9rem;
+          }
+      }
 /* addJobs css end */
 /* Signup & Login Page Styles */
 .auth-container {
@@ -452,167 +521,288 @@ body {
 }
 
 /* Update.ejs css */
-/* Style for the update form */
-#update-form-container {
-  max-width: 600px;
-  margin: 20px auto;
+
+.update-container {
+  background-color: #2c2c2c;
   padding: 20px;
-  background-color: #f8f9fa;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 40px auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-#update-form-container div {
+.update-container h2 {
+  color: #f39c12;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.form-group {
   margin-bottom: 15px;
 }
 
-#update-form-container label {
-  display: block;
+.form-group label {
   font-weight: bold;
+  color: #f1c40f;
   margin-bottom: 5px;
-  color: #333;
+  display: block;
 }
 
-#update-form-container input[type="text"],
-#update-form-container textarea {
-  width: 100%;
+.form-control {
+  background-color: #333333;
+  border: 1px solid #444444;
+  border-radius: 5px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  color: #ffffff;
+  width: 100%;
+  font-size: 0.9rem;
 }
 
-#update-form-container textarea {
-  resize: vertical;
-  height: 100px;
+.form-control:focus {
+  border-color: #f39c12;
+  box-shadow: 0 0 5px #f39c12;
+  outline: none;
 }
 
-#update-form-container button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
+.btn-primary {
+  background-color: #f39c12;
   border: none;
-  border-radius: 4px;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  font-size: 1rem;
+  margin-top: 10px;
 }
 
-#update-form-container button:hover {
-  background-color: #0056b3;
+.btn-primary:hover {
+  background-color: #e67e22;
 }
 
-/* Specific styles for this page */
-.update-page {
-  background-color: #e9ecef;
-  padding: 40px 0;
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 5px #f39c12;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+@media (max-width: 768px) {
+  .update-container {
+      padding: 15px;
+      margin: 30px auto;
+      width: 90%;
+  }
+
+  .btn-primary {
+      padding: 10px;
+      font-size: 0.9rem;
+  }
 }
 
 /* applications.css */
 
+/* General Styles for Applications Page */
 .applications-page {
+  background-color: #1a1a1a; /* Matches the body background color */
+  color: #ffffff; /* Light text color for contrast */
   padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  min-height: 100vh; /* Ensures full viewport height */
 }
+
+.applications-page h1,
+.applications-page h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .applications-page h1 {
-  font-size: 2.5em;
-  color: #333;
-  margin-bottom: 10px;
-  border-bottom: 2px solid #007bff;
-  padding-bottom: 10px;
-  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+color: yellow;
 }
 
 .applications-page h2 {
-  font-size: 1.5em;
-  color: #555;
-  margin-top: 0;
-  margin-bottom: 20px;
-  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: yellow;
 }
 
 .applications-list {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .application-card {
-  background-color: #f7f7f7;
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  background-color: #2c2c2c; /* Slightly lighter background for cards */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.application-card:hover {
+  background-color: #333333; /* Darker background on hover */
+  transform: translateY(-5px); /* Lift effect on hover */
 }
 
 .application-card h3 {
-  margin-top: 0;
-  color: #333;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.application-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
 }
 
 .application-card p {
-  margin: 5px 0;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
 }
 
 .application-card a {
-  color: #007bff;
+  color: #f39c12; /* Bright color for links */
   text-decoration: none;
 }
 
 .application-card a:hover {
-  text-decoration: underline;
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .applications-page {
+      padding: 10px;
+  }
+
+  .application-card {
+      padding: 15px;
+  }
 }
 
 /* User dashboard .css */
-.dashboard-container {
+
+/* Profile Container Styles */
+.profile-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 50px auto;
   padding: 20px;
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
-.dashboard-container h1{
-  color: white;
-  text-align: center;
-}
-
-.dashboard-container h2 {
-
-  text-align: center;
-}
-
-.profile-section, .applications-section {
-  background-color: #f9f9f9;
-  padding: 20px;
+.profile-container h1, .profile-container h2 {
+  color: yellow;
   margin-bottom: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.profile-container p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+.list-group {
+  list-style: none;
+  padding-left: 0;
+}
+.list-group-item {
+  background-color: #3a3a3a;
+  color: #e0e0e0;
+  border: none;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.list-group-item h3 {
+  margin-top: 0;
+  color: #ffffff;
+}
+.list-group-item p {
+  margin: 5px 0;
+}
+.no-applications {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #d1d1d1;
+  margin-top: 20px;
+}
+/* General footer styles */
+/* CSS for Footer */
+/* Footer Styling */
+
+.site-footer {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 40px 0;
+  font-family: 'Arial', sans-serif;
 }
 
-.profile-section p, .applications-section ul {
-  margin: 10px 0;
+.site-footer h4 {
+  color: #f39c12;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
-.applications-section ul {
-  list-style-type: none;
+.site-footer p {
+  color: #dddddd;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.site-footer .footer-links {
+  list-style: none;
   padding: 0;
 }
 
-.applications-section li {
-  background-color: #fff;
-  padding: 15px;
+.site-footer .footer-links li {
   margin-bottom: 10px;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.btn-primary {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+.site-footer .footer-links a {
+  color: #ffffff;
   text-decoration: none;
-  border-radius: 5px;
+  transition: color 0.3s ease;
 }
 
-.btn-primary:hover {
-  background-color: #0056b3;
+.site-footer .footer-links a:hover {
+  color: #f39c12;
 }
+
+.site-footer .footer-bottom {
+  border-top: 1px solid #444;
+  margin-top: 30px;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #bbbbbb;
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+      padding: 30px 20px;
+  }
+
+  .site-footer h4 {
+      font-size: 1.3rem;
+  }
+
+  .site-footer p {
+      font-size: 0.95rem;
+  }
+
+  .site-footer .footer-bottom {
+      font-size: 0.8rem;
+  }
+}
+
 
 
 
