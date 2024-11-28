@@ -3,17 +3,18 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const UserSchema = new Schema({
-    email:{
-        type : String,
-        required : true
+  email: {
+    type: String,
+    required: true
+  },
+  role: {
+    type: String,
+    enum: ['owner', 'user'],  // Only 'owner' or 'user' roles are allowed
+    default: 'user'  // Default to 'user' role if not specified
+  }
+});
 
-    }
-})
-//note by defualt passport provide us with username and password also salting and hashing there we use it here
-     
-    UserSchema.plugin(passportLocalMongoose);
-    module.exports = mongoose.model("User", UserSchema);
+// Using passport-local-mongoose to handle authentication
+UserSchema.plugin(passportLocalMongoose);
 
-
-
-
+module.exports = mongoose.model("User", UserSchema);

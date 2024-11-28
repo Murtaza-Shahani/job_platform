@@ -6,7 +6,7 @@ const EmployeeSchema = new mongoose.Schema({
         ref: 'Listing',
         required: true
     },
-    userId: { // New field to link the application to the user
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -24,7 +24,7 @@ const EmployeeSchema = new mongoose.Schema({
         required: true
     },
     resumeLink: {
-        type: String, // Store only the resume link
+        type: String,
         required: true
     },
     coverLetter: {
@@ -34,8 +34,17 @@ const EmployeeSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    status: {
+        type: String,
+        default: 'Pending'
+    },
+    interview: {
+        date: Date, // Interview date and time
+        mode: String, // "In-person" or "Online"
+        location: String, // Address or meeting link
+        status: { type: String, default: 'Pending' } // "Pending", "Scheduled", "Completed"
     }
 });
 
 module.exports = mongoose.model('Employees', EmployeeSchema);
-

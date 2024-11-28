@@ -181,12 +181,12 @@ app.post('/apply/:jobId', async (req, res) => {
 //addpost Route to render add.ejs 
 
 app.get('/addpost', isLoggedIn, async (req, res) => {
-    const ownerId = '66c2c9c788c4aab0d8c35416';
+    //const ownerId = '66c2c9c788c4aab0d8c35416';
 
     try {
         // Check if the logged-in user is the owner
-        if (!req.user._id.equals(ownerId)) {
-            req.flash('error', 'You do not have permission to add job posts.');
+        if (req.user.role !== 'owner') {
+            req.flash('error', 'You do not have permission to view applications.');
             return res.redirect('/listings');
         }
         
@@ -231,17 +231,17 @@ app.get('/listings/:id/edit', isLoggedIn, async (req, res) => {
         // Find the listing by ID
         const listing = await Listing.findById(id);
         
-        // Check if the logged-in user is the owner
-        if (listing.owner.equals(req.user._id)) {
+        // Check if the logged-in user is the owner (role-based check)
+        if (req.user.role === 'owner' ) {
             // Render the update.ejs view with the listing details
             res.render('update', { listing });
         } else {
-            // If the user is not the owner, redirect with an error message
             req.flash('error', 'You do not have permission to edit this listing.');
             res.redirect(`/listings`);
         }
     } catch (error) {
         console.error('Error finding listing:', error);
+        req.flash('error', 'Error finding the listing.');
         res.redirect('/listings');
     }
 });
@@ -253,8 +253,8 @@ app.put('/listings/:id', isLoggedIn, async (req, res) => {
         const { id } = req.params;
         const listing = await Listing.findById(id);
 
-        // Check if the current user is the owner
-        if (!listing.owner.equals(req.user._id)) {
+        // Check if the current user is the owner (role-based check)
+        if (req.user.role !== 'owner' || !listing.owner.equals(req.user._id)) {
             req.flash('error', 'You do not have permission to edit this listing.');
             return res.redirect(`/listings`);
         }
@@ -274,8 +274,8 @@ app.delete('/listings/:id', isLoggedIn, async (req, res) => {
         const { id } = req.params;
         const listing = await Listing.findById(id);
 
-        // Check if the current user is the owner
-        if (!listing.owner.equals(req.user._id)) {
+        // Check if the current user is the owner (role-based check)
+        if (req.user.role !== 'owner' || !listing.owner.equals(req.user._id)) {
             req.flash('error', 'You do not have permission to delete this listing.');
             return res.redirect(`/listings`);
         }
@@ -291,34 +291,34 @@ app.delete('/listings/:id', isLoggedIn, async (req, res) => {
 });
 //employees list 
 app.get('/applications', isLoggedIn, async (req, res) => {
-    const ownerId = '66c2c9c788c4aab0d8c35416';
-
     try {
-        // Check if the logged-in user is the owner
-        if (!req.user._id.equals(ownerId)) {
+        // Ensure only owners can access this route
+        if (req.user.role !== 'owner') {
             req.flash('error', 'You do not have permission to view applications.');
             return res.redirect('/listings');
         }
-        // Fetch the listings owned by the logged-in user
-        const listings = await Listing.find({ owner: req.user._id });
-        
-        // Extract the listing IDs
-        const listingIds = listings.map(listing => listing._id);
 
-        // Find all applications related to the listings owned by the user
-        const applications = await Employees.find({ jobId: { $in: listingIds } });
-        
-        // Fetch the job titles for all the listings
-        const jobs = await Listing.find({ _id: { $in: listingIds } });
-        const jobTitleMap = jobs.reduce((map, job) => {
-            map[job._id] = job.title;
-            return map;
-        }, {});
+        // Step 1: Fetch all applications
+        const applications = await Employees.find({}).populate('jobId'); // Populate to get job details
+        console.log("Applications found:", applications); // Debug: Verify fetched applications
 
-        // Count the number of applications
+        if (applications.length === 0) {
+            req.flash('info', 'No applications received yet.');
+            return res.render('applications', { applicationCount: 0, applications: [], jobTitleMap: {} });
+        }
+
+        // Step 2: Fetch job titles for applications
+        const jobTitleMap = {};
+        applications.forEach(application => {
+            if (application.jobId) {
+                jobTitleMap[application.jobId._id] = application.jobId.title;
+            }
+        });
+
+        // Step 3: Count the number of applications
         const applicationCount = applications.length;
 
-        // Render the view and pass the data, including job titles
+        // Step 4: Render the view and pass the data
         res.render('applications', { applicationCount, applications, jobTitleMap });
     } catch (error) {
         console.error('Error fetching applications:', error);
@@ -326,26 +326,88 @@ app.get('/applications', isLoggedIn, async (req, res) => {
         res.redirect('/listings');
     }
 });
+
+app.post('/applications/:id/accept', async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Employees.findByIdAndUpdate(id, { status: 'Accepted' });
+        req.flash('success', 'Application accepted.');
+        res.redirect('/applications');
+    } catch (error) {
+        console.error('Error accepting application:', error);
+        req.flash('error', 'Could not accept application.');
+        res.redirect('/applications');
+    }
+});
+
+// Reject an application
+app.post('/applications/:id/reject', async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Employees.findByIdAndUpdate(id, { status: 'Rejected' });
+        req.flash('success', 'Application rejected.');
+        res.redirect('/applications');
+    } catch (error) {
+        console.error('Error rejecting application:', error);
+        req.flash('error', 'Could not reject application.');
+        res.redirect('/applications');
+    }
+});
+//Schedule a interview route 
+app.post('/schedule-interview/:applicationId', async (req, res) => {
+    const { applicationId } = req.params; // Extract application ID from params
+    const { date, mode, location } = req.body; // Extract form data from the request body
+
+    try {
+        // Find the employee document using the applicationId
+        const employee = await Employees.findById(applicationId);
+
+        if (!employee) {
+            console.error("Employee record not found.");
+            return res.status(404).json({ error: "Employee record not found." });
+        }
+
+        // Ensure required fields for the interview
+        if (!employee.jobId || !employee.userId) {
+            console.error("Invalid employee data. JobId or UserId is missing.");
+            return res.status(400).json({ error: "Invalid employee data." });
+        }
+
+        // Update the interview details
+        employee.interview = {
+            status: "Scheduled", // Set status to 'Scheduled'
+            date: date || null, // Ensure date is not undefined
+            mode: mode || null, // Validate mode
+            location: location || null, // Validate location
+        };
+
+        // Save the updated employee document
+        await employee.save();
+
+        req.flash('success', 'Interview scheduled successfully.');
+        res.redirect('/applications');
+    } catch (error) {
+        console.error("Error scheduling interview:", error.message);
+        req.flash('error', 'Error scheduling interview.');
+        res.redirect('/applications');
+        res.status(500).json({ error: "Error scheduling interview." });
+    }
+});
 //user dashboard section 
 // correect Candidate Dashboard Route
 
 app.get('/dashboard', async (req, res) => {
     try {
-        console.log(req.user); 
-        // Fetch the user information from the session
         const user = req.user;
-
         if (!user) {
-            req.flash('error', 'You must be logged in to view your profile');
+            req.flash('error', 'You must be logged in to view your profile.');
             return res.redirect('/login');
         }
 
-        // Fetch all the job applications made by the user
         const applications = await Employees.find({ userId: user._id }).populate('jobId').exec();
-
         res.render('dashboard', { user, applications });
     } catch (err) {
-        console.error(err);
+        console.error('Error fetching user dashboard:', err);
         req.flash('error', 'Something went wrong. Please try again.');
         res.redirect('/');
     }
@@ -363,12 +425,13 @@ app.get("/signup", (req, res) => {
 });
 
 // Handle user signup
-app.post(
-  "/signup",
-  async (req, res, next) => {
+app.post("/signup", async (req, res, next) => {
     try {
-      const { email, username, password } = req.body;
-      const newUser = new User({ email, username });
+      const { email, username, password, role } = req.body;
+  
+      // Assign role based on the form input or default to 'user'
+      const newUser = new User({ email, username, role: role || 'user' });
+  
       const registeredUser = await User.register(newUser, password);
       req.login(registeredUser, (err) => {
         if (err) return next(err);
@@ -379,9 +442,8 @@ app.post(
       req.flash("error", e.message);
       res.redirect("/signup");
     }
-  }
-);
-
+  });
+  
 // Route for the login page
 app.get("/login", (req, res) => {
   res.render("./users/login.ejs");
@@ -389,19 +451,27 @@ app.get("/login", (req, res) => {
 
 // Handle user login
 app.post(
-  "/login",
-  saveRedUrl,
-  passport.authenticate("local", {
-    failureRedirect: "/login",
-    failureFlash: true,
-  }),
-  (req, res) => {
-    req.flash("success", "Logged in successfully");
-    const redirectUrl = res.locals.redirectUrl || "/listings";
-    res.redirect(redirectUrl);
-  }
-);
-
+    "/login",
+    saveRedUrl,
+    passport.authenticate("local", {
+      failureRedirect: "/login",
+      failureFlash: true,
+    }),
+    (req, res) => {
+      req.flash("success", "Logged in successfully");
+  
+      // Check if the user is an owner
+      if (req.user.role === 'owner') {
+        res.locals.isOwner = true;  // Set a local variable for views to check if the user is an owner
+      } else {
+        res.locals.isOwner = false;
+      }
+  
+      const redirectUrl = res.locals.redirectUrl || "/listings";
+      res.redirect(redirectUrl);
+    }
+  );
+  
 // Handle user logout
 app.get("/logout", (req, res, next) => {
   req.logout((err) => {

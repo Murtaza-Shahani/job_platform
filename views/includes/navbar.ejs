@@ -20,9 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/listings">Job Listings</a>
                 </li>
-                
+
                 <% if (user) { %>
-                    <% if (user._id.equals('66c2c9c788c4aab0d8c35416')) { %>
+                    <% if (user.role === 'owner') { %>
                         <!-- Display owner-specific links -->
                         <li class="nav-item">
                             <a class="nav-link" href="/addpost">Add Job</a>

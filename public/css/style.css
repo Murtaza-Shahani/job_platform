@@ -654,17 +654,18 @@ color: yellow;
 }
 
 .application-card h3 {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   margin-bottom: 10px;
 }
 
 .application-card h4 {
-  font-size: 1.1rem;
+  font-size: 1.45rem;
+  color: yellow;
   margin-bottom: 10px;
 }
 
 .application-card p {
-  font-size: 0.9rem;
+  font-size: 1.25rem;
   margin-bottom: 10px;
 }
 
@@ -705,7 +706,7 @@ color: yellow;
   margin-bottom: 20px;
 }
 .profile-container p {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   margin-bottom: 15px;
 }
 .list-group {
@@ -730,7 +731,7 @@ color: yellow;
 }
 .no-applications {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: #d1d1d1;
   margin-top: 20px;
 }
@@ -802,7 +803,95 @@ color: yellow;
       font-size: 0.8rem;
   }
 }
+/*Status css*/
+.status-pending {
+  color: orange;
+  font-weight: bold;
+}
+.status-accepted {
+  color: green;
+  font-weight: bold;
+}
+.status-rejected {
+  color: red;
+  font-weight: bold;
+}
+.reject{
+  width: 80px !important;
+  height: 30px !important;
+  
+  
+}
+/*interview form css */
+/* Schedule Meeting Section */
+.schedule-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 1rem;
+}
 
+.schedule-btn:hover {
+  background-color: #0056b3;
+}
+
+.schedule-form {
+  width: 65%;
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.schedule-form.hidden {
+  display: none;
+}
+
+.schedule-form label {
+  margin-left: 15%;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.schedule-form input,
+.schedule-form select {
+  margin: 0 auto;
+  padding: 8px;
+  font-size: 1rem;
+  background-color: white;
+  border: 1px solid #1a1a1a;
+  border-radius: 5px;
+  width: 70%;
+}
+
+.submit-btn {
+  
+  width: 50%;
+  margin: 0 auto;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.submit-btn:hover {
+  background-color: #218838;
+}
+.reject {
+  width: 88px !important; /* Adjust width as needed */
+  height: 38px !important; /* Adjust height as needed */
+}
 
 
 

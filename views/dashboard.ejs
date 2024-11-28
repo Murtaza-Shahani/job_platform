@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css" />
-    
     <title>Candidate Dashboard</title>
 </head>
 <body>
@@ -12,9 +11,9 @@
         <h1>Hello, <%= user.username %>!</h1>
         <p>Username: <%= user.username %></p>
         <p>Email: <%= user.email %></p>
-    
+
         <h2>Your Job Applications</h2>
-    
+
         <% if (applications.length > 0) { %>
             <ul class="list-group">
                 <% applications.forEach(application => { %>
@@ -25,6 +24,14 @@
                         <p>Category: <%= application.jobId.category %></p>
                         <p>Requirements: <%= application.jobId.requirements %></p>
                         <p>Applied On: <%= new Date(application.createdAt).toLocaleDateString() %></p>
+                        <p>Status: <span class="<%= application.status === 'Accepted' ? 'status-accepted' : application.status === 'Rejected' ? 'status-rejected' : 'status-pending' %>"><%= application.status %></span></p>
+
+                        <% if (application.interview && application.interview.status === 'Scheduled') { %>
+                            <p>Interview Scheduled:</p>
+                            <p>Date: <%= new Date(application.interview.date).toLocaleString() %></p>
+                            <p>Mode: <%= application.interview.mode %></p>
+                            <p>Location: <%= application.interview.location %></p>
+                        <% } %>
                     </li>
                 <% }); %>
             </ul>
@@ -32,5 +39,5 @@
             <p class="no-applications">You have not applied for any jobs yet.</p>
         <% } %>
     </div>
-    </body>
+</body>
 </html>

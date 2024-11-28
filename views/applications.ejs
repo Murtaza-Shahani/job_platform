@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="/css/applications.css">
-
 <div class="applications-page">
     <h1>Applications Overview</h1>
     <h2>You have received <%= applicationCount %> applications.</h2>
@@ -7,12 +5,57 @@
     <div class="applications-list">
         <% applications.forEach(application => { %>
             <div class="application-card">
-                <h3>Job Title: <%= jobTitleMap[application.jobId] %></h3>
+                <h3>Job Title: <%= jobTitleMap[application.jobId._id] %></h3>
                 <h4>Applicant: <%= application.fullName %></h4>
                 <p>Email: <%= application.email %></p>
                 <p>Contact: <%= application.contact %></p>
                 <p>Resume Link: <a href="<%= application.resumeLink %>" target="_blank">View Resume</a></p>
                 <p>Cover Letter: <%= application.coverLetter %></p>
+                <p>Status: <%= application.status %></p>
+
+                <% if (application.status === 'Pending') { %>
+                    <form action="/applications/<%= application._id %>/accept" method="POST" style="display:inline;">
+                        <button class="btn btn-success">Accept</button>
+                    </form>
+                    <form action="/applications/<%= application._id %>/reject" method="POST" style="display:inline;">
+                        <button class="btn btn-danger reject">Reject</button>
+                    </form>
+                <% } %>
+
+                <% if (application.status === 'Accepted' || application.interview) { %>
+                    <div class="interview-section">
+                        <% if (application.interview && application.interview.status === 'Scheduled') { %>
+                            <p>Interview Scheduled:</p>
+                            <p>Date: <%= new Date(application.interview.date).toLocaleString() %></p>
+                            <p>Mode: <%= application.interview.mode %></p>
+                            <p>Location: <%= application.interview.location %></p>
+                        <% } else { %>
+                            <button class="schedule-btn" onclick="toggleScheduleForm('<%= application._id %>')">
+                                Schedule a Meeting
+                            </button>
+
+                            <form id="schedule-form-<%= application._id %>" 
+                                class="schedule-form hidden" 
+                                action="/schedule-interview/<%= application._id %>" 
+                                method="POST">
+                          
+                                <label for="date">Date:</label>
+                                <input type="datetime-local" name="date" required>
+                                
+                                <label for="mode">Mode:</label>
+                                <select name="mode" required>
+                                    <option value="In-person">In-person</option>
+                                    <option value="Online">Online</option>
+                                </select>
+                                
+                                <label for="location">Location:</label>
+                                <input type="text" name="location" placeholder="Address or meeting link" required>
+                                
+                                <button type="submit" class="submit-btn">Submit</button>
+                            </form>
+                        <% } %>
+                    </div>
+                <% } %>
             </div>
         <% }); %>
     </div>
